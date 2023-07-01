@@ -13,8 +13,7 @@ export const Formulario = () => {
 
     let count = null;
     const enable = (user, passs) => {
-        console.log(Boolean(parseInt(user.length) > 6));
-        if ((!user.includes('.')||!user.includes('@')||!parseInt(user.length) < 6)&&parseInt(passs.length) < 8) {return 'error'}
+        if ((!user.includes('.') || user.includes('<') || user.includes('*') || user.includes('/') || !user.includes('@') || !parseInt(user.length) < 6) && (parseInt(passs.length) < 8 || passs.includes('select') || passs.includes('SELECT'))) {return 'error'}
     }
 
     const validateEnable = enable(name,password)
@@ -25,33 +24,18 @@ export const Formulario = () => {
             setNameError(msj);
             return false;
         } else {
-            const names = name;
-            for (let i = 0; i < names.length; i++) {
-                if (names[i] === '@') {
-                    count = i;
-                    for (let j = i; j < names.length; j++) {
-                        if (names[j] === '.') {
-                            const msj = 'Seleccionó Email';
-                            setNameError(msj);
-                        }
+            for (let i = 0; i < name.length; i++) {
+                if (name[i] === '@') {
+                    count = i;   
                     }
                 }
-            }
-            if (count === null) {
-                count = name.length
-                const msj = 'Seleccionó Nombre de Usuario';
-                setNameError(msj);
-            }
         }
 
-        if (password === '' && password === ' ') {
+        if (password.includes('') || password.includes(' ') || password.includes('<') || password.includes('/') || password.includes('select') || password.includes('SELECT')) {
             const msj = 'Ingrese un valor para el campo de Contraseña';
             setPasswordError(msj);
             return false;
-        } else {
-            setPasswordError('');
-        }
-
+        } 
         if (password.length < 8) {
             const msj = 'Ingrese un valor con más de 8 caracteres para el campo de Contraseña';
             setPasswordError(msj);
@@ -84,7 +68,7 @@ export const Formulario = () => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Contraseña</label>
-                            <input type="password" autoComplete="current-password" className="form-control" id="password" placeholder="Ingrese su contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input type="password" required autoComplete="current-password" className="form-control" id="password" placeholder="Ingrese su contraseña" value={password} onChange={(e) => setPassword(e.target.value)} />
                             <div id="passwordERROR" className="form-text text-danger">{passwordError}</div>
                         </div>
                         <button type="button" id="btn-formulario" className="btn btn-primary" onClick={validarFormulario} disabled={validateEnable}>Iniciar Sesión</button>
