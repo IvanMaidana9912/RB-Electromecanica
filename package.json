@@ -1,0 +1,15 @@
+{
+  "name": "rb-express",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "CodeCraze",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

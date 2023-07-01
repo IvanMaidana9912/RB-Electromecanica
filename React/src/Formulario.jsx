@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import db from './../public/ddbb.json'
+
+const [users, pass] = db
 
 export const Formulario = () => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [nameError, setNameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [spanText, setSpanText] = useState('');
+    const [spanSuccess, setSpanSuccess] = useState('');
+
+    let count = null;
 
     const validarFormulario = () => {
-        let count = null;
-
-        if (name === '') {
+        if (name === '' && name === ' ') {
             const msj = 'Ingrese un valor para el campo de Nombre';
             setNameError(msj);
             return false;
@@ -34,29 +38,35 @@ export const Formulario = () => {
             }
         }
 
-        if (password === '') {
+        if (password === '' && password === ' ') {
             const msj = 'Ingrese un valor para el campo de Contraseña';
             setPasswordError(msj);
             return false;
         } else {
             setPasswordError('');
         }
-
-        if (password.length >= 8) {
-            const nameCapitalize1 = name.charAt(0).toUpperCase();
-            const nameCapitalize2 = name.slice(1, count);
-            const nameCapitalize = nameCapitalize1 + nameCapitalize2;
-            const msj = `Hola ${nameCapitalize}! seamos cientificos de datos 😎`;
-            setSpanText(msj);
-            return false;
-        } else {
+   
+        if (password.length < 8) {
             const msj = 'Ingrese un valor con más de 8 caracteres para el campo de Contraseña';
             setPasswordError(msj);
+        } else {
+            if (Boolean(users.username.find(user => user===name)) && Boolean(pass.password.find(pw => pw===password))){
+
+                const nameCapitalize1 = name.charAt(0).toUpperCase();
+                const nameCapitalize2 = name.slice(1, count);
+                const nameCapitalize = nameCapitalize1 + nameCapitalize2;
+                const msj = `Hola ${nameCapitalize}! sea Bienvenido 😎`;
+                setSpanSuccess(msj)
+                return false
+            } else {
+                setSpanSuccess("Ingresó mal el usuario o la contraseña.\n Vuelva a intentar, por favor.")
+            }
         }
     };
 
     return (
-        <div className="container py-5">
+        <div className="container py-5 vh-100">
+            <Link className='fs-3 text-decoration-none' to={'/'}>⬅</Link>
             <div className="row mb-5">
                 <div className="col-md-6 offset-md-3">
                     <form>
@@ -75,7 +85,7 @@ export const Formulario = () => {
                     </form>
                 </div>
             </div>
-            <h1 id="span" className="text-center">{spanText}</h1>
+            <h1 id="span" className="text-center">{spanSuccess}</h1>
         </div>
     );
 };
