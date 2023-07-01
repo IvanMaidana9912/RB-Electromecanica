@@ -22,7 +22,7 @@ export const Register = () => {
                     </form>
                 </div>
             </div>
-            <h1 id="span" className="text-center"></h1>
+            <div id="span" className="text-center fs-3"></div>
         </div>
     )
 }

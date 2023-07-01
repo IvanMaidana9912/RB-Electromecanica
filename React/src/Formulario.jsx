@@ -12,10 +12,9 @@ export const Formulario = () => {
     const [spanSuccess, setSpanSuccess] = useState('');
 
     let count = null;
-    const enable = (user, pass) => {
-        if (!user.includes('.')) {return 'error'}
-        if (!user.includes('@')) {return 'error'}
-        if (!pass.length >= 8) { return 'error'}
+    const enable = (user, passs) => {
+        console.log(Boolean(parseInt(user.length) > 6));
+        if ((!user.includes('.')||!user.includes('@')||!parseInt(user.length) < 6)&&parseInt(passs.length) < 8) {return 'error'}
     }
 
     const validateEnable = enable(name,password)
