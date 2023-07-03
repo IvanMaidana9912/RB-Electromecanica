@@ -1,15 +1,19 @@
 {
-  "name": "rb-express",
-  "version": "0.0.0",
+  "name": "prueba-d",
+  "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/index.js"
   },
-  "author": "CodeCraze",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.4.3",
+    "vite": "^4.3.9"
   }
 }
