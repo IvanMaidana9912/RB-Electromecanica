@@ -12,15 +12,15 @@ export const Formulario = () => {
     const [spanSuccess, setSpanSuccess] = useState('');
 
     let count = null;
-    const enable = (user, passs) => {
-        if ((!user.includes('.') || user.includes('<') || user.includes('*') || user.includes('/') || !user.includes('@') || !parseInt(user.length) < 6) && (parseInt(passs.length) < 8 || passs.includes('select') || passs.includes('SELECT'))) {return 'error'}
+    const enable = (user, pw) => {
+        if ((!user.includes('.') || user.includes('<') || user.includes('*') || user.includes('/') || !user.includes('@') || !parseInt(user.length) < 6) && (parseInt(pw.length) < 8 || pw.includes('select') || pw.includes('SELECT') || pw.includes(' ') || pw.includes('<') || pw.includes('/'))) {return 'error'}
     }
 
-    const validateEnable = enable(name,password)
+    const validateEnable = name !== '' && password !== '' ? enable(name, password) : 'error';
 
     const validarFormulario = () => {
-        if (name.includes('') && name.includes(' ')) {
-            const msj = 'Ingrese un valor para el campo de Nombre';
+        if (name === '' ||name.includes(' ') || name.includes('<') || name.includes('/') || name.includes('select') || name.includes('SELECT')) {
+            const msj = 'Ingrese un valor para el campo de Email';
             setNameError(msj);
             return false;
         } else {
@@ -31,7 +31,7 @@ export const Formulario = () => {
                 }
         }
 
-        if (password.includes('') || password.includes(' ') || password.includes('<') || password.includes('/') || password.includes('select') || password.includes('SELECT')) {
+        if (password === '' || password.includes(' ') || password.includes('<') || password.includes('/') || password.includes('select') || password.includes('SELECT')) {
             const msj = 'Ingrese un valor para el campo de Contraseña';
             setPasswordError(msj);
             return false;
@@ -62,7 +62,7 @@ export const Formulario = () => {
                     <form>
                         <h1 className="text-center mb-5">Iniciar Sesión</h1>
                         <div className="mb-3">
-                            <label htmlFor="nombre" className="form-label">Nombre</label>
+                            <label htmlFor="nombre" className="form-label">Email</label>
                             <input type="text" autoComplete="current-password" className="form-control" id="nombre" placeholder="Ingrese su Email" value={name} onChange={(e) => setName(e.target.value)} />
                             <div id="nombreERROR" className="form-text text-danger">{nameError}</div>
                         </div>

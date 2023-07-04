@@ -1,8 +1,8 @@
 [
     {
-        "username": ["admin","ivan@gmail.com"]
+        "username": ["admin@gmail.com","ivan@gmail.com"]
     },
     {
-        "password": ["123123123","holaholahola"]
+        "password": ["123123123","123456789"]
     }
 ]
