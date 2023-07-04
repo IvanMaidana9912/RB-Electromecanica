@@ -13,44 +13,51 @@ export const Formulario = () => {
 
     let count = null;
     const enable = (user, pw) => {
-        if ((!user.includes('.') || user.includes('<') || user.includes('*') || user.includes('/') || !user.includes('@') || !parseInt(user.length) < 6) && (parseInt(pw.length) < 8 || pw.includes('select') || pw.includes('SELECT') || pw.includes(' ') || pw.includes('<') || pw.includes('/'))) {return 'error'}
+        if ((!user.includes('.') || user.includes('<') || user.includes('*') || user.includes('/') || !user.includes('@') || !parseInt(user.length) < 6) && (parseInt(pw.length) < 8 || pw.includes('select') || pw.includes('SELECT') || pw.includes(' ') || pw.includes('<') || pw.includes('/'))) { return 'error' }
     }
 
     const validateEnable = name !== '' && password !== '' ? enable(name, password) : 'error';
 
     const validarFormulario = () => {
-        if (name === '' ||name.includes(' ') || name.includes('<') || name.includes('/') || name.includes('select') || name.includes('SELECT')) {
+        if (name === '' || name.includes(' ') || name.includes('<') || name.includes('/') || name.includes('select') || name.includes('SELECT')) {
             const msj = 'Ingrese un valor para el campo de Email';
             setNameError(msj);
             return false;
         } else {
             for (let i = 0; i < name.length; i++) {
                 if (name[i] === '@') {
-                    count = i;   
-                    }
+                    count = i;
                 }
+            }
         }
 
         if (password === '' || password.includes(' ') || password.includes('<') || password.includes('/') || password.includes('select') || password.includes('SELECT')) {
             const msj = 'Ingrese un valor para el campo de Contraseña';
             setPasswordError(msj);
             return false;
-        } 
+        }
         if (password.length < 8) {
             const msj = 'Ingrese un valor con más de 8 caracteres para el campo de Contraseña';
             setPasswordError(msj);
         } else {
-            if (Boolean(users.username.find(user => user === name)) && Boolean(pass.password.find(pw => pw === password))) {
+            const nameCapitalize1 = name.charAt(0).toUpperCase();
+            const nameCapitalize2 = name.slice(1, count);
+            const nameCapitalize = nameCapitalize1 + nameCapitalize2;
+            const msj = `Hola ${nameCapitalize}! sea Bienvenido 😎`;
+            const relative = `${window.location.href}`.split('LogIn')
+            const [redirect] = relative
 
-                const nameCapitalize1 = name.charAt(0).toUpperCase();
-                const nameCapitalize2 = name.slice(1, count);
-                const nameCapitalize = nameCapitalize1 + nameCapitalize2;
-                const msj = `Hola ${nameCapitalize}! sea Bienvenido 😎`;
-                setSpanSuccess(msj)
-                return false
-            } else {
-                setSpanSuccess("Ingresó mal el usuario o la contraseña.\n Vuelva a intentar, por favor.")
+            const promise = new Promise((resolve) => {
+                const reddFunc = () => {
+                    setSpanSuccess(msj)
+                    window.location.href = `${redirect}user`
+                }
+
+                setTimeout(() => {
+                    resolve(Boolean(users.username.find(user => user === name)) && Boolean(pass.password.find(pw => pw === password)) ? reddFunc() : setSpanSuccess("Ingresó mal el usuario o la contraseña.\n Vuelva a intentar, por favor."))
+                }, 1000)
             }
+            )
         }
     };
 
