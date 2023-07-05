@@ -13,13 +13,13 @@ services:
       - dataDB:/var/lib/mysql
   
   nodeapp:
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
     depends_on:
       - mysqldb
     links:
       - mysqldb
-    volumes:
-      - .:/myapp
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
 

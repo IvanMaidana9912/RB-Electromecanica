@@ -1,27 +1,38 @@
-# Instrucciones:
+# INFORMATION:
 
 ## ENVIROMENTS:
-- MYSQLDB_HOST=
-- MYSQLDB_ROOT_PASSWORD=
-- MYSQLDB_DATEBASE=ivandb
+### Create file ".env" with environment variables:
 
-- MYSQLDB_LOCAL_PORT=
-- MYSQLDB_DOCKER_PORT=
+- MYSQLDB_HOST= NAMEHOST
+- MYSQLDB_ROOT_PASSWORD= PASSWORDROOT
+- MYSQLDB_DATEBASE= NAMEDATABASE
 
-- NODE_LOCAL_PORT=
-- NODE_DOCKER_PORT=
+- MYSQLDB_LOCAL_PORT= PORTOUT
+- MYSQLDB_DOCKER_PORT= PORTIN (3306)
+
+- NODE_LOCAL_PORT= PORTOUT InN BROWSER
+- NODE_DOCKER_PORT= PORTIN DOCKERCONTEINER
 
 ## RUN:
+### PRODUCTION:
 
 - docker compose up
+
+### DEV:
+- docker compose -f docker-compose-dev.yml up
 
 ## STOP:
 
 - docker compose down
 
-## BUILD:
+## BUILD CHANGES:
+### PRODUCTION:
 
 - docker compose up --build
+
+### DEV:
+
+- docker compose -f docker-compose-dev.yml up --build
 
 ## OTHERS COMMANDS:
 

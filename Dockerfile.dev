@@ -1,0 +1,10 @@
+FROM node:18
+
+RUN npm install npm@latest -g
+WORKDIR /myapp
+COPY package*.json .
+COPY . .
+
+EXPOSE 3005
+
+CMD npm ci && npm i nodemon -g && cd views-react && npm ci && npm run build && cd .. && npm run start-dev
